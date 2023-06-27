@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { useLogOutMutation } from 'redux/authorization/authApi';
 import { logout, setError } from 'redux/authorization/authSlice';
 import { useAuth } from 'redux/hook';
-import { removeToken } from 'redux/store';
 import { RotatingLines } from 'react-loader-spinner';
 
 export const UserMenu = () => {
@@ -26,7 +25,7 @@ export const UserMenu = () => {
     try {
       await logOut().unwrap();
       dispatch(logout());
-      removeToken();
+      window.location.reload()
       navigate('/');
     } catch (error) {
       Notify.failure(`Logout failed: ${error.status}`);
